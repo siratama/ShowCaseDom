@@ -1,0 +1,6 @@
+-js deploy/js/main.js
+-main showcase.Main
+-cp src
+-lib jQueryExtern
+-debug
+

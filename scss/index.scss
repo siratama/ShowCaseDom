@@ -1,0 +1,155 @@
+@import "../deploy/js/setting.json";
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * showcase
+ */
+$showcase_width: 450px;
+$showcase_height: 70px;
+$button_width: 50px;
+
+$screen_width: $showcase_width - ($button_width * 2);
+$item_width: $screen_width / $item_display_total;
+
+//error check
+@if ($screen_width % $item_display_total != 0px){
+	@error "float value error: $screen_width / $item_display_total = " + $screen_width / $item_display_total;
+}
+@else{
+	@debug "$screen_width:" + $screen_width;
+	@debug "$item_width:" + $item_width;
+	@debug "$item_display_total:" + $item_display_total;
+}
+
+/*
+ * item
+ */
+$item_place_size: 60px;
+$item_place_x: ($item_width / 2) - ($item_place_size / 2);
+$item_place_y: ($showcase_height / 2) - ($item_place_size / 2);
+
+//error check
+@if($item_place_size > $item_width){
+	@error "item_place_size:" + $item_place_size + " > $item_width:" + $item_width;
+}
+
+@if ((round($item_place_x) != $item_place_x) or (round($item_place_y) != $item_place_y)){
+	@error "item_place_position:" + $item_place_x + "," + $item_place_y;
+}
+@else{
+	@debug "item_place_position:" + $item_place_x + "," + $item_place_y;
+}
+
+body
+{
+	background-color: #333333;
+}
+
+.showcase
+{
+	width: $showcase_width;
+	height: $showcase_height;
+	position: relative;
+
+	.button
+	{
+		background-color: #ffffaa;
+		width: $button_width;
+		height: 100%;
+		position: absolute;
+	}
+	.right
+	{
+		right: 0;
+	}
+	.screen
+	{
+		width: $showcase_width - ($button_width * 2);
+		height: 100%;
+		background-color: #aaffaa;
+		position: absolute;
+		left: $button_width;
+		overflow: hidden;
+
+		.items{
+			position: absolute;
+			height: 100%;
+		}
+		.item{
+			width: $item_width;
+			height: 100%;
+			background-color: #aaaaff;
+			position: absolute;
+
+			.place{
+				position: absolute;
+				left: $item_place_x;
+				top: $item_place_y;
+				width: $item_place_size;
+				height: $item_place_size;
+				background-color: #ffffff;
+			}
+		}
+		.guide{
+		}
+	}
+}
+
+/*
+@mixin hitarea($x, $y, $width, $height, $background_color:#ff0000)
+{
+	position: absolute;
+	left: $x;
+	top: $y;
+	width: $width;
+	height: $height;
+	background-color: $background_color;
+}
+
+#click_area{
+	width: $showcase_width;
+	height: $game_screen_height;
+	position: absolute;
+	opacity: 0.5;
+	.scene1{
+		.table{ @include hitarea(100px, 20px, 40px, 30px, #ff00ff); }
+		.bed{ @include hitarea(20px, 20px, 30px, 40px); }
+	}
+}
+*/
+
+
+/*
+button{
+  height: 32px;
+  width: 130px;
+  color: #d7d7d7;
+  font-size: 11px;
+  border: 1px solid #151515;
+  background: -webkit-linear-gradient(top, $gradient_first, $gradient_end);
+
+  &:enabled:hover {
+    &:hover {
+      background: -webkit-linear-gradient(top, #636363, #4e4e4e);
+    }
+    &:active{
+      border: 1px solid #c69100;
+    }
+  }
+  &:disabled{
+    color: #686868;
+    background: -webkit-linear-gradient(top, $gradient_first - #111111, $gradient_end - #111111);
+    img{
+      opacity: 0.2;
+    }
+  }
+  .note{
+    font-size: 10px;
+    color: #bbbbbb;
+  }
+}
+*/
