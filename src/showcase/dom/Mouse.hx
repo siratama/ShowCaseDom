@@ -24,12 +24,6 @@ class Mouse
 		rootElement = root;
 		rootElementPosition = rootElement.position();
 
-		/*
-		rootElement.click(function(event:Event){
-			position = PointUtil.create(event.pageX - rootElementPosition.left, event.pageY - rootElementPosition.top);
-		});
-		*/
-
 		rootElement.mousedown(function(event:Event){
 			downedEvent = event;
 		});
